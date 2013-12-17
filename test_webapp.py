@@ -16,25 +16,25 @@ def test_get_hello_world_is_a_json_response_that_returns_200_ok():
     assert response.content_type == 'application/json'
     assert json.loads(response.data) == {'message': 'Hello, World!'}
 
-@mock.patch('text.generate', return_value=['text'])
+@mock.patch('text.generate', return_value='text')
 @mock.patch('html_parse.gather_headlines')
 def test_get_urls_should_generate_200_ok_response(gather_headlines, generate):
     response = webapp.app.test_client().get('/vg.no,db.no')
     assert response.status_code == 200
 
-@mock.patch('text.generate', return_value=['text'])
+@mock.patch('text.generate', return_value='text')
 @mock.patch('html_parse.gather_headlines')
 def test_get_urls_should_fetch_webpages(gather_headlines, generate):
     response = webapp.app.test_client().get('/vg.no,db.no')
     gather_headlines.assert_called_with(['http://vg.no', 'http://db.no'])
 
-@mock.patch('text.generate', return_value=['text'])
+@mock.patch('text.generate', return_value='text')
 @mock.patch('html_parse.gather_headlines')
 def test_get_urls_should_generate_text_and_return_it_as_a_json_object(gather_headlines, generate):
     response = webapp.app.test_client().get('/vg.no,db.no')
-    assert json.loads(response.data) == {'generated': ['text']}
+    assert json.loads(response.data) == {'generated': 'text'}
 
-@mock.patch('text.generate', return_value=['text'])
+@mock.patch('text.generate', return_value='text')
 @mock.patch('html_parse.gather_headlines', return_value=['headline1', 'head line 2'])
 @mock.patch('text.chain_from')
 def test_get_urls_should_invoke_generate_correctly(chain_from, gather_headlines, generate):
