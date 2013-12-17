@@ -2,7 +2,6 @@
 Testcases for the html_parse module.
 """
 import mock
-import StringIO
 from bs4 import BeautifulSoup
 import html_parse
 
