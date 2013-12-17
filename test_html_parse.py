@@ -1,8 +1,11 @@
 """
 Testcases for the html_parse module.
 """
+import mock
+import StringIO
 from bs4 import BeautifulSoup
 import html_parse
+
 
 html = """
 <doctype html>
@@ -34,3 +37,14 @@ def test_all_headlines():
         'This is a headline',
         'Also a headline'
     ]
+
+@mock.patch('urllib.urlopen')
+def test_gather_headlines_should_get_headlines_from_webpages(urlopen):
+    urlopen().read.return_value = html
+    assert html_parse.gather_headlines(['http://vg.no', 'http://db.no']) == [
+        'This is a headline',
+        'Also a headline',
+        'This is a headline',
+        'Also a headline'
+    ]
+    urlopen.assert_has_calls([mock.call('http://vg.no'), mock.call('http://db.no')], any_order=True)
