@@ -1,5 +1,6 @@
 import webapp
 import json
+import mock
 
 def test_httpify_should_prepend_http_to_adress_without_http():
     assert webapp.httpify('vg.no') == 'http://vg.no'
@@ -32,3 +33,10 @@ def test_get_urls_should_fetch_webpages(gather_headlines, generate):
 def test_get_urls_should_generate_text_and_return_it_as_a_json_object(gather_headlines, generate):
     response = webapp.app.test_client().get('/vg.no,db.no')
     assert json.loads(response.data) == {'generated': ['text']}
+
+@mock.patch('text.generate', return_value=['text'])
+@mock.patch('html_parse.gather_headlines', return_value=['headline1', 'head line 2'])
+@mock.patch('text.chain_from')
+def test_get_urls_should_invoke_generate_correctly(chain_from, gather_headlines, generate):
+    response = webapp.app.test_client().get('/vg.no,db.no')
+    chain_from.assert_called_with([['headline1'], ['head', 'line', '2']])
