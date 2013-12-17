@@ -105,3 +105,5 @@ excellenter:
 - A GUI using twitter bootstrap and ajax to responsively train and generate
   text.
 - Websockets. Because why not.
+- Smarter text parsing - making the program understand punctuation and where
+  sentences start and stop.
