@@ -88,3 +88,20 @@ https://devcenter.heroku.com/articles/getting-started-with-python
 The flask app is more or less empty and just waiting to hook up the scraping
 code and text code. It is setup in debug-mode, don't run it like that in
 production.
+
+Improvements
+----------
+The straightforward app is very simple. Here are some ideas for making it more
+excellenter:
+
+- The basic app uses prefixes that consist of words. It is possible to use the
+  same algorithm using character-based prefixes and suffixes. Written this way,
+  you could possible generate code. It would be interesting to code generate
+  based on its own code. Right? Can't be worse than xmlbeans anyway...
+- Persistent state using sqlite3 to store the chain. This way, when something is
+  trained it is never forgotten. This is tricky to do in a general way because
+  using chains of different `order`s need to be handled intelligently.
+- Persistent state using something more hipster than sqlite3, like mongodb.
+- A GUI using twitter bootstrap and ajax to responsively train and generate
+  text.
+- Websockets. Because why not.
