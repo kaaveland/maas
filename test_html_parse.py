@@ -39,6 +39,7 @@ def test_all_headlines():
 
 @mock.patch('urllib.urlopen')
 def test_gather_headlines_should_get_headlines_from_webpages(urlopen):
+    urlopen().__enter__.return_value = urlopen()
     urlopen().read.return_value = html
     assert html_parse.gather_headlines(['http://vg.no', 'http://db.no']) == [
         'This is a headline',
