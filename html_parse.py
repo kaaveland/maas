@@ -22,5 +22,5 @@ def all_headlines_from(url):
     pass
 
 def gather_headlines(urls):
-    """Return the aggregate list of every headline found in each webpage in `webpages`."""
+    """Return the aggregate list of every headline found in each url in `urls`."""
     pass
