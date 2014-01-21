@@ -21,6 +21,6 @@ def all_headlines_from(url):
     """Open url using `urlib` and extract all the headlines from it."""
     pass
 
-def gather_headlines(webpages):
+def gather_headlines(urls):
     """Return the aggregate list of every headline found in each webpage in `webpages`."""
     pass
