@@ -27,6 +27,13 @@ def test_should_find_expected_prefix_mapping():
     expected[shifted3] = ["test"]
     assert text.find_prefixes(sentence, 2) == expected
 
+def test_find_prefix_mapping_should_preserve_located_words():
+    sentence = ["is", "is", "a"]
+    follows_is = ["is", "a"]
+    is_prefix = text.shift("is", text.null_prefix(1))
+    actual_prefixes = text.find_prefixes(sentence, 1)
+    assert actual_prefixes[is_prefix] == follows_is
+
 def test_merging_chains():
     null_prefix = text.null_prefix(1)
     left, right = {null_prefix: ["first", "second"]}, {null_prefix: ["third"]}
